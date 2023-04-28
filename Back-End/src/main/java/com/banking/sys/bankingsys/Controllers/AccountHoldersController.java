@@ -18,9 +18,9 @@ public class AccountHoldersController {
         this.accountHoldersInfoRepository = accountHoldersInfoRepository;
     }
 
-    @GetMapping("user/{id}/info")
-    public AccountHoldersInfo getAccountHolderInfoById(@PathVariable Integer id) {
-        AccountHoldersInfo acc = accountHoldersInfoRepository.findById(id).get();
+    @GetMapping("user/{customerId}/info")
+    public AccountHoldersInfo getAccountHolderInfoById(@PathVariable Integer customerId) {
+        AccountHoldersInfo acc = accountHoldersInfoRepository.findById(customerId).get();
         return acc;
     }
 

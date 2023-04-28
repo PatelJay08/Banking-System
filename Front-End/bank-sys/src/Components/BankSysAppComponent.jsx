@@ -3,9 +3,8 @@ import AccountInfoComponent from "./AccountInfoComponent";
 import AccountInfoUpdateComponent from "./AccountInfoUpdateComponent";
 import AuthProvider, { useAuth } from "./security/AuthContext";
 import LoginComponent from "./LoginComponent";
-
-
-
+import ViewTransactionsComponent from "./ViewTransactionsComponent"
+import DepositTransactionComponent from "./DepositTransactionComponent";
 
 export default function BankSysAppComponent() {
     function ProtectedRoutes({ chlidren }) {
@@ -33,6 +32,12 @@ export default function BankSysAppComponent() {
 
                             <AccountInfoUpdateComponent />
 
+                        } />
+                        <Route path="/user/:userid/transactions/history" element={
+                            <ViewTransactionsComponent />
+                        } />
+                        <Route path="/user/:userid/transactions" element={
+                            <DepositTransactionComponent />
                         } />
                     </Routes>
                 </AuthProvider>

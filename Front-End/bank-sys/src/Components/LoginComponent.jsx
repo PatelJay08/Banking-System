@@ -3,7 +3,7 @@ import { useAuth } from "./security/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginComponent() {
-    
+
     const customerId = 15001
     const password = 'Jay'
 
@@ -12,22 +12,22 @@ export default function LoginComponent() {
     const login = AuthContext.login
     const navigate = useNavigate()
 
-    function onSubmit(values){
-        if(login(values.customerId,values.password)){
+    function onSubmit(values) {
+        if (login(values.customerId, values.password)) {
             navigate(`/user/${values.customerId}/account`)
             // console.log(customerId);
         }
-        else{
+        else {
             navigate("/")
         }
     }
 
-    return(
+    return (
         <div>
-            <Formik 
-            initialValues={{customerId, password}}
-            enableReinitialize={true}
-            onSubmit={onSubmit}
+            <Formik
+                initialValues={{ customerId, password }}
+                enableReinitialize={true}
+                onSubmit={onSubmit}
             >
                 {
                     (props) => (
@@ -37,7 +37,7 @@ export default function LoginComponent() {
                                 <Field type="number" name="customerId" className="form-contol"></Field>
                             </fieldset>
                             <fieldset className="form-group m-2">
-                                <label>UserId : </label>
+                                <label>Password : </label>
                                 <Field type="password" name="password" className="form-contol"></Field>
                             </fieldset>
                             <div>

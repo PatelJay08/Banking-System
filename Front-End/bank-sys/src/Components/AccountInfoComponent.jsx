@@ -13,12 +13,12 @@ export default function AccountInfoComponent() {
     const navigate = useNavigate()
 
     // const [customerId, setCustomerId] = useState(15001)
-    const [accountNo,setAccountNo] = useState(0)
-    const [firstName,setFirstname] = useState('fname')
-    const [middleName,setMiddlename] = useState('mname')
-    const [lastName,setLastname] = useState('lname')
-    const [dateOfBirth,setDateOfBirth] = useState("0000-00-00")
-    const [accountActivationDate,setAccountActivationDate] = useState("0000-00-00")
+    const [accountNo, setAccountNo] = useState(0)
+    const [firstName, setFirstname] = useState('fname')
+    const [middleName, setMiddlename] = useState('mname')
+    const [lastName, setLastname] = useState('lname')
+    const [dateOfBirth, setDateOfBirth] = useState("0000-00-00")
+    const [accountActivationDate, setAccountActivationDate] = useState("0000-00-00")
 
 
     useEffect(
@@ -46,13 +46,23 @@ export default function AccountInfoComponent() {
             )
     }
 
-    function goToUpdateData(){
+    function goToUpdateData() {
         navigate(`/user/${customerId}/account/update`)
+    }
+
+    function goToTransactionHistory() {
+        navigate(`/user/${customerId}/transactions/history`)
+    }
+
+    function goToPerformTransaction(){
+        navigate(`/user/${customerId}/transactions`)
     }
 
     return (
         <div>
             <button className="btn btn-success" onClick={goToUpdateData} >Update</button>
+            <button className="btn btn-success" onClick={goToTransactionHistory} >Transaction History</button>
+            <button className="btn btn-success" onClick={goToPerformTransaction} >Perform Transaction</button>
         </div>
     )
 }
