@@ -30,6 +30,15 @@ public class TransactionInfoController {
             @RequestBody TransactionInfo transactionInfo) {
         transactionInfo.setCustomerId(customerId);
         transactionInfo.setId(null);
+        transactionInfo.setRecipientsaccountNo(null);
         return transactionInfoRepository.save(transactionInfo);
     }
+
+    @PostMapping("user/{customerId}/transactions/transfer")
+    public TransactionInfo transferFunds(@PathVariable Integer customerId,@RequestBody TransactionInfo transactionInfo){
+        transactionInfo.setCustomerId(customerId);
+        transactionInfo.setId(null);
+        return transactionInfoRepository.save(transactionInfo);
+    }
+
 }

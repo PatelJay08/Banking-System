@@ -13,6 +13,7 @@ public class TransactionInfo {
 
     private int customerId;
     private double accountNo;
+    private Double recipientsaccountNo;
     private double amount;
     private String type;
 
@@ -56,18 +57,27 @@ public class TransactionInfo {
         this.type = type;
     }
 
+    
+    public Double getRecipientsaccountNo() {
+        return recipientsaccountNo;
+    }
+
+    public void setRecipientsaccountNo(Double recipientsaccountNo) {
+        this.recipientsaccountNo = recipientsaccountNo;
+    }
+
     public TransactionInfo() {
 
     }
 
-    public TransactionInfo(Integer id, int customerId, double accountNo, double amount, String type) {
+    public TransactionInfo(Integer id, int customerId, double accountNo, double recipientsaccountNo, double amount,
+            String type) {
         this.id = id;
         this.customerId = customerId;
         this.accountNo = accountNo;
+        this.recipientsaccountNo = recipientsaccountNo;
         this.amount = amount;
         this.type = type;
     }
-
-    
 
 }

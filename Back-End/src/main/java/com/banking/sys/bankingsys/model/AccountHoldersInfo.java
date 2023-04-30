@@ -10,7 +10,7 @@ public class AccountHoldersInfo {
     
     @Id
     private int customerId;
-    
+
     private double accountNo;
     private String firstName;
     private String middleName;
@@ -34,6 +34,7 @@ public class AccountHoldersInfo {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
+
     public double getAccountNo() {
         return accountNo;
     }
@@ -129,6 +130,7 @@ public class AccountHoldersInfo {
     public AccountHoldersInfo() {
 
     }
+
     @Override
     public String toString() {
         return "AccountHoldersInfo [customerId=" + customerId + ", accountNo=" + accountNo + ", firstName=" + firstName
@@ -137,7 +139,5 @@ public class AccountHoldersInfo {
                 + ", mobileNo=" + mobileNo + ", accountType=" + accountType + ", accountStatus=" + accountStatus
                 + ", accountActivationDate=" + accountActivationDate + ", balance=" + balance + "]";
     }
-
-    
 
 }

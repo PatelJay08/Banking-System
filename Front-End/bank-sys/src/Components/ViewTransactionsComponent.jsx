@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllTransactionInfo } from "./Api/ApiService"
 import { useAuth } from "./security/AuthContext"
+import HeaderComponent from "./HeaderComponent"
 
 export default function ViewTransactionsComponent() {
 
@@ -10,7 +11,7 @@ export default function ViewTransactionsComponent() {
     const [trxarr, setTrxarr] = useState([])
 
     useEffect(
-        () => getData(), []
+        () => getData()
     )
 
     function getData() {
@@ -24,29 +25,34 @@ export default function ViewTransactionsComponent() {
     }
 
     return (
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Account No</th>
-                        <th>Amount</th>
-                        <th>Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        trxarr.map(
-                            arr => (
-                                <tr key={arr.id}>
-                                    <td>{arr.accountNo}</td>
-                                    <td>{arr.amount}</td>
-                                    <td>{arr.type}</td>
-                                </tr>
+        <div className="container">
+            <HeaderComponent />
+            <div className="table-responsive">
+                <table className="table table-light table-bordered table-hover">
+                    <thead className="thead-light">
+                        <tr>
+                            <th>Account No</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Res. Account No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            trxarr.map(
+                                arr => (
+                                    <tr key={arr.id}>
+                                        <td>{arr.accountNo}</td>
+                                        <td>{arr.amount}</td>
+                                        <td>{arr.type}</td>
+                                        <td>{arr.recipientsaccountNo}</td>
+                                    </tr>
+                                )
                             )
-                        )
-                    }
-                </tbody>
-            </table>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }

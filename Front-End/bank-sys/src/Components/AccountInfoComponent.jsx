@@ -1,8 +1,8 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getAccountInfo } from "./Api/ApiService"
 import { useAuth } from "./security/AuthContext"
+import HeaderComponent from "./HeaderComponent"
 
 export default function AccountInfoComponent() {
 
@@ -11,32 +11,17 @@ export default function AccountInfoComponent() {
     const AuthContext = useAuth()
     const customerId = AuthContext.customerId
     const navigate = useNavigate()
-
-    // const [customerId, setCustomerId] = useState(15001)
-    const [accountNo, setAccountNo] = useState(0)
-    const [firstName, setFirstname] = useState('fname')
-    const [middleName, setMiddlename] = useState('mname')
-    const [lastName, setLastname] = useState('lname')
-    const [dateOfBirth, setDateOfBirth] = useState("0000-00-00")
-    const [accountActivationDate, setAccountActivationDate] = useState("0000-00-00")
-
+    const [trxarr, setTrxarr] = useState([])
 
     useEffect(
-        () => getData(), []
+        () => getData(),[]
     )
 
     function getData() {
         getAccountInfo(customerId)
             .then(
                 response => {
-                    console.log(response.data)
-                    // setCustomerId(response.data.customerId)
-                    setAccountNo(response.data.accountNo)
-                    setMiddlename(response.data.middleName)
-                    setLastname(response.data.lastName)
-                    setDateOfBirth(response.data.dateOfBirth)
-                    setFirstname(response.data.firstName)
-                    setAccountActivationDate(response.data.accountActivationDate)
+                    setTrxarr(response.data)
                 }
             )
             .catch(
@@ -50,19 +35,34 @@ export default function AccountInfoComponent() {
         navigate(`/user/${customerId}/account/update`)
     }
 
-    function goToTransactionHistory() {
-        navigate(`/user/${customerId}/transactions/history`)
-    }
-
-    function goToPerformTransaction(){
-        navigate(`/user/${customerId}/transactions`)
+    function goToChangePassword(){
+        navigate(`/user/${customerId}/account/update/password`)
     }
 
     return (
-        <div>
+        <div className="container">
+            <HeaderComponent />
+            <div>
+                <label>Account No : </label><input className="inp" value={trxarr.accountNo} readOnly={true} ></input>
+            </div>
+            <div>
+                <label>First Name : </label><input className="inp" value={trxarr.firstName} readOnly={true} ></input>
+            </div>
+            <div>
+                <label>Middle Name : </label><input className="inp" value={trxarr.middleName} readOnly={true} ></input>
+            </div>
+            <div>
+                <label>Last Name : </label><input className="inp" value={trxarr.lastName} readOnly={true} ></input>
+            </div>
+            <div>
+                <label>Account Activation Date : </label><input className="inp" value={trxarr.accountActivationDate} readOnly={true} ></input>
+            </div>
+        <br />
+        <br />
             <button className="btn btn-success" onClick={goToUpdateData} >Update</button>
-            <button className="btn btn-success" onClick={goToTransactionHistory} >Transaction History</button>
-            <button className="btn btn-success" onClick={goToPerformTransaction} >Perform Transaction</button>
+        <br />
+        <br />
+            <button className="btn btn-success" onClick={goToChangePassword} >Change Password</button>
         </div>
     )
 }

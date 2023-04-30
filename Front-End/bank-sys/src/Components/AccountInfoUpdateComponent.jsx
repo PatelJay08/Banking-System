@@ -3,6 +3,7 @@ import { getAccountInfo, updateAccountInfo } from "./Api/ApiService";
 import { useAuth } from "./security/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import HeaderComponent from "./HeaderComponent";
 
 export default function AccountInfoUpdateComponent() {
 
@@ -105,6 +106,7 @@ export default function AccountInfoUpdateComponent() {
 
     return (
         <div className="container">
+            <HeaderComponent />
             <Formik
                 initialValues={{ firstName, middleName, lastName, city, state, street, emailId, pincode, mobileNo }}
                 enableReinitialize={true}

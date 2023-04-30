@@ -6,15 +6,17 @@ import LoginComponent from "./LoginComponent";
 import ViewTransactionsComponent from "./ViewTransactionsComponent"
 import DepositTransactionComponent from "./DepositTransactionComponent";
 
+import './BankSysComponent.css'
+import SignupComponent from "./SignupComponent";
+import UpdatePasswordComponent from "./UpdatePasswordComponent";
+
 export default function BankSysAppComponent() {
-    function ProtectedRoutes({ chlidren }) {
-        const AuthContext = useAuth()
-        if (AuthContext.isAuthenticated) {
-            return chlidren
-        }
-        else (
-            <Navigate to="/" />
-        )
+
+    function AuthenticatedRoute({ children }) {
+        const authContext = useAuth()
+        if (authContext.isAuthenticated)
+            return children
+        return <Navigate to="/" />
     }
 
     return (
@@ -23,21 +25,32 @@ export default function BankSysAppComponent() {
                 <AuthProvider>
                     <Routes>
                         <Route path="/" element={<LoginComponent />} />
+                        <Route path="/login" element={<LoginComponent />} />
+                        <Route path="/signup" element={<SignupComponent />} />
                         <Route path="/user/:customerId/account" element={
-
-                            <AccountInfoComponent />
-
+                            <AuthenticatedRoute>
+                                <AccountInfoComponent />
+                            </AuthenticatedRoute>
                         }></Route>
-                        <Route path="/user/:userid/account/update" element={
-
-                            <AccountInfoUpdateComponent />
-
+                        <Route path="/user/:customerId/account/update" element={
+                            <AuthenticatedRoute>
+                                <AccountInfoUpdateComponent />
+                            </AuthenticatedRoute>
                         } />
-                        <Route path="/user/:userid/transactions/history" element={
-                            <ViewTransactionsComponent />
+                        <Route path="/user/:customerId/transactions/history" element={
+                            <AuthenticatedRoute>
+                                <ViewTransactionsComponent />
+                            </AuthenticatedRoute>
                         } />
-                        <Route path="/user/:userid/transactions" element={
-                            <DepositTransactionComponent />
+                        <Route path="/user/:customerId/transactions" element={
+                            <AuthenticatedRoute>
+                                <DepositTransactionComponent />
+                            </AuthenticatedRoute>
+                        } />
+                        <Route path="/user/:customerId/account/update/password" element={
+                            <AuthenticatedRoute>
+                                <UpdatePasswordComponent />
+                            </AuthenticatedRoute>
                         } />
                     </Routes>
                 </AuthProvider>
